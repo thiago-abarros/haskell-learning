@@ -16,7 +16,18 @@ import System.IO
 
 -- Haskell é estaticamente tipado, ou seja, não dá para mudar o tipo da variável após criar-la
 -- Listas em haskell também são tipadas, ou seja, não tem como armazenar mais de um tipo na mesma lista
+-- Tuplas podem armazenar mais de um tipo de dado
 
+{- Background Haskell
+    - Haskell é uma linguagem de programação funcional
+    - Tudo é imutável, então, quando um valor é colocado como algo, é colocado para sempre
+    - Funções podem ser passadas como parâmetros de outras funções
+    - Recursão é bastante utilizada nessa linguagem
+    - Haskell não tem funções como for, while, e tecnicamente não possui variáveis,
+    mas possui constantes.
+    - Haskell é chamado de "Lazy" ou preguiçoso porque ele não executa mais do que é
+    preciso, só checa os erros no código. 
+-}
 -- Tipos de dados em Haskell:
 -- Bool, Int, Integer, Float, Double, Char, [Char], Tuples ()
 
@@ -64,8 +75,15 @@ modNum' :: Integer = 9 `mod` 2 -- E esse é operador de infixo, que é o mais ut
 -- Caso queiramos por números negativos nas equações, temos que escrever entre parênteses para o compilador entender
 addNeg :: Integer = 4 + (-5)
 
--- Algumas constantes e operações matemáticas já existentes em Haskell são:
--- pi, exp, log, sin, cos, asin, acos, atan
+-- Algumas funções matemáticas Built-in
+piValor :: Double = pi 
+ePower9 :: Double = exp 9
+logOf9 :: Double = log 9
+squared9 :: Double = 9 ** 2
+
+-- Também temos: sin, cos, tan, asin, acos, atan, sinh, cosh, tanh
+
+-- Funções de Arrendondamento
 truncDouble :: Integer = truncate myDouble
 roundDouble :: Integer = round myDouble
 ceilDouble :: Integer = ceiling myDouble
@@ -73,3 +91,7 @@ floorDouble :: Integer = floor myDouble
 
 -- Tirar a raiz de um número pelo método sqrt sempre retornará um float, portanto, cuidado com a tipagem de funções deste tipo
 squareFive :: Float = sqrt numFive'
+
+-- Outro Cuidado a se tomar com o sqrt, é que ele também só toma como parâmetro números fluantes, como doubles e floats
+num9 :: Int = 9
+raizDe9 :: Float = sqrt (fromIntegral num9) -- O fromIntegral converte um Int em Float

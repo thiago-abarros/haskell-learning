@@ -60,12 +60,28 @@ mapList :: [Int] = map (*2) [1, 3..10] -- Uma das funções mais utilizadas no h
 unordenedList :: [Int] = [524, 2, 34, 5, 60, 8, 10, 1, 34]
 sortList :: [Int] = sort unordenedList
 
--- Alguns comandos para se usar no GHCI
+-- Alguns comandos para se usar no GHCI e com Listas
 {-
     head -> Pega o primeiro número de uma lista
-    tail -> Pega todos os membros da lista menos o primeiro valor
     last -> Pega o último valor da lista
+    tail -> Pega todos os membros da lista menos o primeiro valor
     init -> Pega todos os membros da lista menos o último valor
+
+    take -> pega um número específico de elementos de uma lista
+    drop -> retorna os valores depois de remover os valores especificados
+    `elem` -> checa se um elemento está contido na lista
+    maximum -> pega o maior valor da lista
+    minimun -> pega o menor valor da lista
+    sum -> soma os valores da lista
+    product -> múltiplica todos os valores de uma lista
+-}
+
+-- Alguns Comandos úteis para operações com Listas:
+{-
+    lenght -> pega o número de elementos de uma lista
+    reverse -> pega o reverso da lista
+    !! num -> pega um elemento da lista pelo seu index ex: segundoPrimo = listaPrimos !! 1
+    null -> checa se a lista está vazia ou não e retorna um booleano 
 -}
 
 -- Vejamos algumas funções interessantes:
@@ -73,7 +89,7 @@ multiList :: Int = product [2..5]
 
 -- Ou, podemos fazer funções matemáticas com o foldr, vejamos um exemplo:
 -- 2 * (3 * (4 * (5 * 2)))
-multiList' :: Int = foldr (*) 2[2..5] -- Basicamente a mesma coisa do multiList, porém, com tudo múltiplicado por 3
+multiList' :: Int = foldr (*) 3[2..5] -- Basicamente a mesma coisa do multiList, porém, com tudo múltiplicado por 3
 
 -- o foldr faz as operações na sequência que foi implementada, já o foldl faz ao contrário, vejamos o exemplo:
 -- (((((1) - 5) - 4) - 3) - 2)
@@ -92,4 +108,3 @@ takeFibs :: [Int] = take 20 infiniteFibs
 listFunc :: [Int]= [x * y | x <- [1..3], y <- [1..5]]
 -- Podemos também filtrar os resultados de uma função, como por exemplo, pegando todos os números os quais são divisíveis por 3
 divisibleBy3 :: [Int] = [x * y | x <- [1..3], y <- [1..5], x * y `mod` 3 == 0]
-
