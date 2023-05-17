@@ -50,3 +50,27 @@ whatGrade age
     | (age > 10) && (age <= 14) = "Fundamental 2"
     | (age > 15) && (age <= 18) = "Ensino Médio"
     | otherwise = "Vai para a faculdade grr"
+
+-- Where
+-- Usamos o where para definirmos parâmetros para nossas funções
+batAvgRating :: Double -> Double -> String 
+batAvgRating hits atBats 
+    | avg <= 0.200 = "Horrivel performance"
+    | avg <= 0.250 = "Jogador mdio"
+    | avg <= 0.280 = "Ta jogando muito bem ein"
+    | otherwise = "Voce e uma estrela do Baseball :00"
+    where avg = hits / atBats
+
+-- Um método para acessar itens de uma lista
+getListItems :: [Int] -> String 
+
+getListItems [] = "Sua lista esta vazia"
+getListItems[x] = "Sua lista contem: " ++ show x
+getListItems[x,y] = "Sua lista contem: " ++ show x ++ " e " ++ show y
+getListItems(x:xs) = "O primeiro item da sua lista e " ++ show x ++ " e o resto e " ++ show xs
+
+-- Pegando a primeira letra de uma String
+getFirstItem :: String -> String 
+
+getFirstItem [] = "String vazia"
+getFirstItem all@(x:xs) = "A primeira letra de " ++ all ++ " e " ++ [x]
