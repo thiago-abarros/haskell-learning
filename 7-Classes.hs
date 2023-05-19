@@ -12,10 +12,12 @@ tomSmith :: Customer
 tomSmith = Customer "Tom Smith" "123 Main St" 20.50
 
 -- Definindo como encontraremos o Customer certo e retornando o valor dele
+
+-- Criando "métodos" para a nossa classe
 getBalance :: Customer -> Double 
 getBalance (Customer _ _ b) = b 
 
-tomSmithBal = print (getBalance tomSmith) 
+tomSmithBal :: IO () = print (getBalance tomSmith) 
 
 -- tambem podemos definir um tipo com todos os valores possiveis das variaveis
 data RockPaperScissors = Rock | Paper | Scissors 
@@ -26,12 +28,16 @@ shoot Scissors Paper = "Tesoura corta papel"
 shoot Scissors Rock = "Tesoura perde para a pedra"
 shoot Paper Scissors = "Papel perde para a Tesoura"
 shoot Rock Paper = "Pedra perde para o Papel"
-shoot _ _ = "Error"
+shoot _ _ = "Error" -- Pegando qualquer coisa que não entra nos outros casos
 
 -- Tambem podemos definir 2 versoes de um mesmo tipo 
 -- Primeiro 2 floats como coordenadas centrais e 1 float como o raio do Circulo
 -- Os primeiros 2 floats sao para o canto superior esquerdo e
 -- Os ultimos 2 Floats  para o canto inferior direito de um retangulo. 
+
+-- Perceba que nosso shape possui duas "classes", que possuem parâmetros
+-- diferentes, porém, poderiam ser também parâmetros iguais, já que 
+-- especificamos qual "classe" queremos usar para fazer os métodos 
 
 data Shape = Circle Float Float Float 
             | Rectangle Float Float Float Float 
@@ -47,10 +53,16 @@ area (Rectangle x y x2 y2) = abs (x2-x) * abs (y2-y)
 -- outra coisa que vem antes (uma alternativa para adicionar parenteses)
 
 -- pegando a area das formas
-areaOfCircle :: Float = area (Circle 50 60 20)
-areaOfRetangle :: Float = area (Rectangle 10 10 100 100)
+areaOfCircle :: Float = area (Circle 50 60 10)
+areaOfRectangle :: Float = area (Rectangle 0 0 20 25)
 
--- Classes de tipagem
+-- Operador de ponto em haskell
+-- Usado para por vários comandos de uma só vez juntos
+sumValues :: IO () = putStrLn (show (1+2))
+sumValues' :: IO () = putStrLn . show $ 1 + 2
+sumValues'' :: IO () = print $ 1 + 2
+
+-- Classes de tipagem ou de tipo
 -- Num, Eq, Ord e Show são classes de tipagem
 -- Classes de tipagem correspondem ao conjunto de tipos
 -- os quais possuem certas operações definidas por eles
@@ -66,7 +78,7 @@ de tipagem, com parâmetros do tipo Num.
 :t (+) = Num a => a -> a -> a
 Isso fala que para qualquer tipo de a, des de que a
 seja uma instância de Num, o sinal de + pega 2 valores
-e retorna um outro tipo de Num.  
+e retorna um outro tipo de Num. 
 -}
 
 -- Vamos criar uma classe chamada funcionário e 
@@ -77,8 +89,7 @@ data Employee = Employee { name :: String,
                            idNum :: Int
 } deriving (Eq, Show)
 -- Colocamos Eq para operações de igualdade funcionarem
--- e o Show para conseguirmos mostrar os dados que 
--- estão contidos
+-- e o Show para conseguirmos mostrar os dados que estão contidos
 samSmith :: Employee = 
     Employee {name = "Sam Smith", position = "Manager", idNum = 1000}
 
@@ -90,25 +101,27 @@ isSamPam :: Bool = samSmith == pamMarx
 -- Podemos printar para mostrar o valor do show
 samSmithData :: String = show samSmith
 
--- Fazendo uma tipagem de instância da classe Eq e Show
 data ShirtSize = S | M | L 
+-- Fazendo um override da classe Eq e Show
 
+-- Definindo o que o eq (operação de igualdade) faz
 instance Eq ShirtSize where
     S == S = True
     M == M = True
     L == L = True
     _ == _ = False  
 
+-- Definindo o que a classe Show faz
 instance Show ShirtSize where 
     show S = "Pequeno"
     show M = "Medio"
     show L = "Grande"
 
 -- Checando se S é um elemento da lista 
-smallAvail = S `elem` [S, M, L]
+smallAvail :: Bool = S `elem` [S, M, L]
 
 -- Pegando o valor String para o ShirtSize
-theSize = show S 
+theSize :: String = show S 
 
 -- Definindo uma classe de tipo customizada para checar igualdade
 -- "a" representa qualquer tipo que implementa a função areEqual
