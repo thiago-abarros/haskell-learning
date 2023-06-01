@@ -16,6 +16,7 @@ doubleTo10' :: [Int] = map (\x -> x * 2) [1..10]
 -- Operadores lógicos: && || not
 
 -- Todo if precisa de um else em haskell 
+doubleEvenNumber :: Integral a => a -> a
 doubleEvenNumber y = 
     if (y `mod` 2 /= 0)
         then y

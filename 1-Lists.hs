@@ -105,6 +105,6 @@ infiniteFibs :: [Int] = 0 : 1 : zipWith (+) infiniteFibs (tail infiniteFibs)
 -- [0, 1] ([1]) -> [0,1,1,2] ([1,1,2]) -> [0,1,1,2,3,5] ([1,1,2,3,5]) -> ... infinitamente
 takeFibs :: [Int] = take 20 infiniteFibs
 
-listFunc :: [Int]= [x * y | x <- [1..3], y <- [1..5]]
+listFunc :: [Int] = [x * y | x <- [1..3], y <- [1..5]]
 -- Podemos também filtrar os resultados de uma função, como por exemplo, pegando todos os números os quais são divisíveis por 3
 divisibleBy3 :: [Int] = [x * y | x <- [1..3], y <- [1..5], x * y `mod` 3 == 0]
