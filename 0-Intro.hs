@@ -8,6 +8,7 @@ Para rodar o código, abrimos um terminal e executamos:
     :l (nome do arquivo.hs) -> para carregar o arquivo que quer codar
     :r   -> para recarregar o código colocado
     :!clear -> para limpar o console do ghci
+    :cd -> para acessar um diretório específico no Haskell
 -}
 
 -- Imports

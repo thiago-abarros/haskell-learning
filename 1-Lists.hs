@@ -66,7 +66,8 @@ sortList :: [Int] = sort unordenedList
     last -> Pega o último valor da lista
     tail -> Pega todos os membros da lista menos o primeiro valor
     init -> Pega todos os membros da lista menos o último valor
-
+    
+    !! -> Seleciona o n-ésimo elemento de uma lista
     take -> pega um número específico de elementos de uma lista
     drop -> retorna os valores depois de remover os valores especificados
     `elem` -> checa se um elemento está contido na lista

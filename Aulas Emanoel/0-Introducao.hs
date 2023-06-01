@@ -8,9 +8,9 @@ soma :: Int -> Int
 soma n = sum [1..n]
 
 -- Também podemos fazer de modo recursivo essa soma, da seguinte forma:
-soma' :: Int -> Int
+soma' :: [Int] -> Int
 soma' [] = 0 
-soma' (x:xs) = x + soma xs
+soma' (x:xs) = x + soma' xs
 
 -- Fibonnaci exemplo, usando recursão: 
 fib :: [Int] = 0 : 1 : zipWith (+) fib (tail fib)
@@ -45,18 +45,21 @@ Já a palavra Where introduz definições locais das coisas que foram usadas no 
     maiores -> que vai conter os valores maiores que o pivô x
 -}
 
+quickSort :: Ord a => [a] -> [a]
 quickSort [] = []
 quickSort (x:xs) = quickSort menores ++ [x] ++ quickSort maiores 
     where
         menores = [a | a <- xs, a < x]
         maiores = [b | b <- xs, b > x]
 
+quickSortInverso :: Ord a => [a] -> [a]
 quickSortInverso [] = []
 quickSortInverso (x:xs) = quickSortInverso maiores ++ [x] ++ quickSortInverso menores
     where
         menores = [a | a <- xs, a < x]
         maiores = [b | b <- xs, b > x]
 
+quickSortIgual :: Ord a => [a] -> [a]
 quickSortIgual [] = []
 quickSortIgual (x:xs) = quickSortIgual menoresIguais ++ [x] ++ quickSortIgual maiores
     where
