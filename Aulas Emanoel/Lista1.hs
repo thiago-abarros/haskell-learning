@@ -1,3 +1,5 @@
+{-# LANGUAGE ParallelListComp #-}
+import Data.Char (isDigit)
 
 -- Questão 1 
 
@@ -146,8 +148,54 @@ posicaoLista' n l = go 0 n l
             | n == x = i
             | otherwise = go (i+1) n xs
 
+-- Implementação 2 do método
+posicaoLista'' :: (Eq t, Num t) => t -> [t] -> t
+posicaoLista'' x [] = -1 
+posicaoLista'' x (y:ys) 
+    | x == 0 = y
+    | otherwise = pos (x -1) ys 
 
--- Questão 18
-intersectionLists :: [Integer] -> [Integer] -> [Integer]
+pos' :: Int -> [a] -> a
+pos' x ys = head (drop x ys)
+
+-- Questão 18  
+merge :: Ord a => [a] -> [a] -> [a]
+merge xs ls = quickSort (xs ++ ls)
+
+quickSort :: Ord a => [a] -> [a]
+quickSort (x:xs) = menores ++ [x] ++ maiores
+    where
+        menores = [y | y <- xs, y <= x]
+        maiores = [y | y <- xs, y > x]
+
+-- Merge é uma estrutura de dados para juntar os dados de duas listas e ordena-las em uma só lista
+merge' :: Ord a => [a] -> [a] -> [a]
+merge' xs [] = xs
+merge' [] ys = ys
+merge' (x:xs) (y:ys) = if x < y then x : merge xs (y:ys) else y : merge (x:xs) ys
+ 
+-- Questão 19
+
+intersectionLists :: Eq a => [a] -> [a] -> [a]
 intersectionLists [] = const []
 intersectionLists xs = filter (`elem` xs)
+
+intersectionLists' :: (Foldable t, Eq a) => [a] -> t a -> [a]
+intersectionLists' xs ys = [x | x <- xs, x `elem` ys]
+
+-- Questão 20
+comprime :: [Char] -> [Char]
+comprime [] = [ ]
+comprime (x:xs) = if tamanho > 2 then "!" ++ show (tamanho + 1) ++ [x] ++ comprime (drop tamanho xs) else [x] ++ comprime xs
+    where 
+        repeticao = takeWhile (==x) xs 
+        tamanho = length repeticao
+
+-- Questão 21
+descomprima :: [Char] -> [Char]
+descomprima [] = []
+descomprima ('!':xs) = replicate (read numero::Int) y ++ descomprima ys 
+    where
+        numero = takeWhile isDigit xs
+        (y:ys) = drop (length numero) xs 
+descomprima (x:xs) = x : descomprima xs
