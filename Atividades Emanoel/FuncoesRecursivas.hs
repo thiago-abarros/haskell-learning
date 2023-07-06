@@ -21,7 +21,7 @@ euclides :: (Num t, Ord t) => t -> t -> t
 euclides m n = if n == m then m else euclides (max m n - min m n) (min n m)
 
 euclides' :: (Ord a, Num a) => a -> a -> a
-euclides' m n 
+euclides' m n
     | m == n = m
     | otherwise = euclides' (maximo - minimo) minimo
         where
@@ -53,7 +53,36 @@ isInList [] _ = False
 isInList (x:xs) e = (x == e) || isInList xs e
 
 -- Exercício 6
+merge :: Ord a => [a] -> [a] -> [a]
+merge [] ys = ys
+merge xs [] = xs
+merge (x:xs) (y:ys)
+    | x <= y = x : merge xs (y:ys)
+    | otherwise = y : merge ys (x:xs)
 
 -- Exercício 7
 
+metades :: [a] -> ([a], [a])
+metades [] = error "Lista vazia não é permitida"
+metades xs = splitAt (length xs `div` 2) xs
+
+mergeSort :: Ord a => [a] -> [a]
+mergeSort [] = []
+mergeSort [x] = [x]
+mergeSort xs = merge (mergeSort (fst $ metades xs)) (mergeSort (snd $ metades xs))
+
 -- Exercício 8
+-- A) calcular a soma de uma lista de inteiros
+somaLista :: [Int] -> Int
+somaLista [] = 0
+somaLista (x:xs) = x + somaLista xs
+
+-- B) obtenha o número de elementos de uma lista
+numElements' :: Num a1 => [a2] -> a1
+numElements' [] = 0
+numElements' (x:xs) = 1 + numElements' xs
+
+-- C) Selecione o último elemento de uma lista
+lastElem :: Eq a => [a] -> a
+lastElem [] = error "Lista vazia passada"
+lastElem (x:xs) = if xs == [] then x else lastElem xs
