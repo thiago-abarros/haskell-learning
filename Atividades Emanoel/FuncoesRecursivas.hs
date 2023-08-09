@@ -53,12 +53,20 @@ isInList [] _ = False
 isInList (x:xs) e = (x == e) || isInList xs e
 
 -- Exercício 6
-merge :: Ord a => [a] -> [a] -> [a]
-merge [] ys = ys
-merge xs [] = xs
-merge (x:xs) (y:ys)
+insertionSort :: Ord a => [a] -> [a] -> [a]
+insertionSort [] ys = ys
+insertionSort xs [] = xs
+insertionSort (x:xs) (y:ys)
     | x <= y = x : merge xs (y:ys)
     | otherwise = y : merge ys (x:xs)
+
+merge :: Ord a => [a] -> [a] -> [a]
+merge [] [] = []
+merge l [] = l
+merge [] l = l
+merge (x:xs) (y:ys) 
+    | x <= y = x : merge xs (y:ys)
+    | otherwise = y : merge (x:xs) ys
 
 -- Exercício 7
 
@@ -69,7 +77,8 @@ metades xs = splitAt (length xs `div` 2) xs
 mergeSort :: Ord a => [a] -> [a]
 mergeSort [] = []
 mergeSort [x] = [x]
-mergeSort xs = merge (mergeSort (fst $ metades xs)) (mergeSort (snd $ metades xs))
+mergeSort xs = merge (mergeSort esquerda) (mergeSort direita)
+    where (direita, esquerda) = metades xs
 
 -- Exercício 8
 -- A) calcular a soma de uma lista de inteiros
