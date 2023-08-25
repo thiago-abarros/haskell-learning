@@ -5,6 +5,11 @@
     se algo está ordenado ou não de acordo com essas instâncias.
 -}
 
+{-   Emanoel def: 
+    Classes definem um conjunto de funções que podem ser aplicadas a todos os membros daquela classe.   
+    Para definir-se um tipo como membro de uma classe, criamos uma instância do tipo para a classe alvo. 
+-}
+
 -- Exercício 2
 multiplyBy2 :: Num a => a -> a
 multiplyBy2 x = x * 2
@@ -20,7 +25,7 @@ applyFunction' func (x:xs) = func x : applyFunction' func xs
 
 -- Exercicio 3
 splitString :: Int -> Int -> [a] -> [a]
-splitString initial final list = drop initial (take (final+1) list)
+splitString initial final list = drop initial (take (final) list)
 
 -- Exercicio 4
 splitAt' :: Eq a => [a] -> a -> [[a]]

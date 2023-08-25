@@ -16,6 +16,10 @@ returnOddInOrder = ordList . filter odd
 elemAt' :: Int -> [a] -> a
 elemAt' e xs = xs !! max 0 e
 
+posicao :: (Eq t, Num t) => t -> [a] -> a
+posicao n (x:xs)
+    | n == 0 = x
+    | otherwise = posicao (n-1) xs
 -- 3)  Defina uma função que repita as ocorrências até um determinado 
 -- valor, no formato de uma lista, tal que (NÃO PODE USAR O replicate):
 
@@ -25,11 +29,6 @@ takeNums' n = take n [n, n..]
 repeat' :: Int -> [[Int]]
 repeat' 0 = []
 repeat' e = takeNums' e : repeat' (e-1)
-
--- Saída 2
-repeat'' :: Int -> [Int]
-repeat'' 0 = []
-repeat'' e = takeNums' e ++ repeat'' (e-1)
 
 -- 4) Construa uma função que cheque se o conteúdo de uma lista é um palíndromo:
 
@@ -87,7 +86,7 @@ unfoldMap' f = unfold' (==[]) (\l -> f (head l)) tail
 -- Fazendo a função iterate
 -- Predicado pode ser uma lambda \x -> False
 unfoldIterate :: (a -> a) -> a -> [a]
-unfoldIterate f = unfold' (const False) id f
+unfoldIterate f = unfold' (\x -> False) id f
 
 -- 10) Defina a função altMap :: (a -> b) -> (a -> b) -> [a] -> [b] que aplica de forma alternada as duas funções que recebe como argumento a elementos sucessivos em uma lista.
 -- Exemplo: altMap (+10) (+100) [0,1,2,3,4] deve retornar [10, 101, 12, 103, 14]
